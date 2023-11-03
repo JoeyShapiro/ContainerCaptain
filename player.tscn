@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1dggx807wm0g"]
+
+[ext_resource type="Texture2D" uid="uid://bi2x4pwwwt5t" path="res://icon.svg" id="1_mmmok"]
+[ext_resource type="Script" path="res://player.gd" id="1_uaiom"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uaig3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mmmok")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p445x"]
+radius = 41.0
+height = 132.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_uaiom")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uaig3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_p445x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
