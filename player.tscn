@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1dggx807wm0g"]
 
-[ext_resource type="Texture2D" uid="uid://bi2x4pwwwt5t" path="res://icon.svg" id="1_mmmok"]
 [ext_resource type="Script" path="res://player.gd" id="1_uaiom"]
+[ext_resource type="Texture2D" uid="uid://dpbvgo00e1uty" path="res://freighter.png" id="2_o0l43"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uaig3"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_mmmok")
+"texture": ExtResource("2_o0l43")
 }],
 "loop": true,
 "name": &"default",
@@ -28,6 +28,8 @@ script = ExtResource("1_uaiom")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_uaig3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

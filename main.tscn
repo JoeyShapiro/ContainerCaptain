@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://daojnt5ue41f"]
+[gd_scene load_steps=8 format=3 uid="uid://daojnt5ue41f"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_45dk6"]
 [ext_resource type="PackedScene" uid="uid://c1dggx807wm0g" path="res://player.tscn" id="1_ijd0x"]
-[ext_resource type="PackedScene" uid="uid://cd68cg54x4evm" path="res://mob.tscn" id="2_d28pq"]
+[ext_resource type="PackedScene" uid="uid://bwnudvv2w1r8r" path="res://pirateRam.tscn" id="2_iel74"]
+[ext_resource type="PackedScene" uid="uid://rw5ec1cqiwvk" path="res://hud.tscn" id="4_8pyms"]
+[ext_resource type="Shader" path="res://water.gdshader" id="5_7aeye"]
 
 [sub_resource type="Curve2D" id="Curve2D_7txy2"]
 _data = {
@@ -10,9 +12,13 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2wu1"]
+shader = ExtResource("5_7aeye")
+shader_parameter/scale = Vector2(10, 10)
+
 [node name="Main" type="Node"]
 script = ExtResource("1_45dk6")
-mob_scene = ExtResource("2_d28pq")
+mob_scene = ExtResource("2_iel74")
 
 [node name="Player" parent="." instance=ExtResource("1_ijd0x")]
 
@@ -32,5 +38,17 @@ curve = SubResource("Curve2D_7txy2")
 [node name="MobSpawnLoc" type="PathFollow2D" parent="PathMob"]
 position = Vector2(3, 2)
 
+[node name="Hud" parent="." instance=ExtResource("4_8pyms")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_m2wu1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="TimerMob" to="." method="_on_timer_mob_timeout"]
 [connection signal="timeout" from="TimerStart" to="." method="_on_timer_start_timeout"]

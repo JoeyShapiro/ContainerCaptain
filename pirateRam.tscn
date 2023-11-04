@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwnudvv2w1r8r"]
+
+[ext_resource type="Script" path="res://pirateRam.gd" id="1_137oy"]
+[ext_resource type="Texture2D" uid="uid://k20yuhqicv6e" path="res://boat.png" id="2_qk4jy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tqc1f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qk4jy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_msnas"]
+radius = 38.0
+height = 128.0
+
+[node name="RigitBody2D" type="RigidBody2D" groups=["enemy"]]
+gravity_scale = 2.66454e-15
+script = ExtResource("1_137oy")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0.129412, 0.027451, 1)
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_tqc1f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_msnas")
