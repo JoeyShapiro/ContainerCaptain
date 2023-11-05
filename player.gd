@@ -3,6 +3,8 @@ signal hit
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
 @export var hull = 100
+@export var gold = 100 # energy
+@export var resources = 0 # TODO should i swap these or something
 
 var screen_size # Size of the game window.
 

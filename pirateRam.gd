@@ -9,7 +9,7 @@ var ram_timer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_node(path_to_player) # seems bad, but eh
-	ram_timer = 0
+	ram_timer = 0.001 # TODO so the first hit counts
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -17,9 +17,11 @@ func _process(delta):
 	
 	rotation += r
 	
+	# TODO dont waste time on math
 	velocity = Vector2(cos(rotation), sin(rotation)) * speed
 	if ram_timer > 0:
 		ram_timer -= delta
+		#ram_timer = max(ram_timer, 0)
 		velocity = Vector2.ZERO
 	
 	position += velocity

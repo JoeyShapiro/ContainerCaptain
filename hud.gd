@@ -10,5 +10,7 @@ func _ready():
 func _process(delta):
 	pass
 
-func update_health(health):
-	$LabelHealth.text = 'hull: ' + str(health)
+func display_stats(health, gold, resources):
+	$VBoxContainer/LabelHealth.text = '🛟: ' + str(health)
+	$VBoxContainer/LabelGold.text = '💎: ' + str(gold)
+	$VBoxContainer/LabelResources.text = '🪵: ' + str(resources)

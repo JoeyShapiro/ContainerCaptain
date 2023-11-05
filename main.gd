@@ -21,7 +21,7 @@ func new_game():
 	#$StartTimer.start()
 	$TimerMob.start()
 	
-	$Hud.update_health($Player.hull)
+	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
 
 func _on_timer_mob_timeout():
 	# Create a new instance of the Mob scene.
@@ -56,4 +56,4 @@ func _on_timer_start_timeout():
 
 
 func _on_player_hit():
-	$Hud.update_health($Player.hull)
+	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
