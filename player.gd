@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 signal hit
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
@@ -32,14 +32,13 @@ func _process(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
-
 func _on_body_entered(body):
 	#hide() # Player disappears after being hit.
 	hit.emit()
 	hull -= 1
 	# Must be deferred as we can't change physics properties on a physics callback.
 	#$CollisionShape2D.set_deferred("disabled", true)
-	
+
 func start(pos):
 	position = pos
 	show()

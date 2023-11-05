@@ -23,7 +23,7 @@ animations = [{
 radius = 41.0
 height = 132.0
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uaiom")
 metadata/_edit_group_ = true
 
@@ -34,5 +34,3 @@ sprite_frames = SubResource("SpriteFrames_uaig3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_p445x")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
