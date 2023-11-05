@@ -39,6 +39,10 @@ func _on_body_entered(body):
 	# Must be deferred as we can't change physics properties on a physics callback.
 	#$CollisionShape2D.set_deferred("disabled", true)
 
+func on_hit(damage):
+	hit.emit()
+	hull -= damage
+
 func start(pos):
 	position = pos
 	show()
