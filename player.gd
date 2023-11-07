@@ -25,6 +25,7 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+	if Input.is_action_pressed("shoot"):
 		shoot()
 
 	if velocity.length() > 0:
@@ -53,9 +54,13 @@ func start(pos):
 	$CollisionShape2D.disabled = false
 
 func shoot():
-	# cool effect, but not what i want
+	var enemies = get_tree().get_nodes_in_group('enemy')
 	var bullet = bullet_scene.instantiate()
 	bullet.position = position
-	bullet.velocity = Vector2(1, 0)
+	var r = get_angle_to(enemies[0].position)
+	# dont care about rotation
+	bullet.direction = Vector2(cos(r), sin(r))
+	bullet.speed = 4
+	bullet.damage = 1
 	
 	get_node('../').add_child(bullet)

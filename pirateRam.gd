@@ -34,3 +34,6 @@ func _physics_process(delta):
 			collision_body.get_collider().on_hit(1)
 			position -= velocity * speed * 15
 		ram_timer = ram_cooldown
+
+func on_hit(damage):
+	queue_free()
