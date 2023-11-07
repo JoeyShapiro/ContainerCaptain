@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwnudvv2w1r8r"]
+[gd_scene load_steps=6 format=3 uid="uid://bwnudvv2w1r8r"]
 
 [ext_resource type="Script" path="res://pirateRam.gd" id="1_137oy"]
+[ext_resource type="PackedScene" uid="uid://b7utkqtrd73uq" path="res://resource.tscn" id="2_6pvcb"]
 [ext_resource type="Texture2D" uid="uid://k20yuhqicv6e" path="res://boat.png" id="2_qk4jy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tqc1f"]
@@ -22,6 +23,7 @@ height = 128.0
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_137oy")
+resource_scene = ExtResource("2_6pvcb")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

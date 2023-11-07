@@ -26,8 +26,8 @@ func new_game():
 func _on_timer_mob_timeout():
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
-	if len(get_tree().get_nodes_in_group('enemy')):
-		return
+	#if len(get_tree().get_nodes_in_group('enemy')):
+	#	return
 
 	# Choose a random location on Path2D.
 	var mob_spawn_location = get_node("PathMob/MobSpawnLoc")
@@ -56,4 +56,8 @@ func _on_timer_start_timeout():
 
 
 func _on_player_hit():
+	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
+
+
+func _on_player_stat_change():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)

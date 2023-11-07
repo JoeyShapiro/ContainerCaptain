@@ -6,6 +6,8 @@ var player
 var ram_timer
 @export var speed = 2
 
+@export var resource_scene : PackedScene
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_node(path_to_player) # seems bad, but eh
@@ -36,4 +38,9 @@ func _physics_process(delta):
 		ram_timer = ram_cooldown
 
 func on_hit(damage):
+	var resource = resource_scene.instantiate()
+	resource.position = position
+	
+	get_node('../').add_child(resource)
+	
 	queue_free()

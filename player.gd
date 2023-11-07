@@ -1,5 +1,6 @@
 extends CharacterBody2D
 signal hit
+signal stat_change
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
 @export var hull = 100
@@ -13,7 +14,6 @@ var screen_size # Size of the game window.
 func _ready():
 	screen_size = get_viewport_rect().size
 	$TimerShoot.start()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -48,6 +48,7 @@ func _on_body_entered(body):
 func on_hit(damage):
 	hit.emit()
 	hull -= damage
+	stat_change.emit()
 
 func start(pos):
 	position = pos
@@ -79,6 +80,10 @@ func shoot():
 		
 		get_node('../').add_child(bullet)
 
-
 func _on_timer_shoot_timeout():
 	shoot()
+
+func on_pickup(item):
+	print('collected ', item)
+	resources += 1
+	stat_change.emit()

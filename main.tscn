@@ -50,5 +50,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[connection signal="stat_change" from="Player" to="." method="_on_player_stat_change"]
 [connection signal="timeout" from="TimerMob" to="." method="_on_timer_mob_timeout"]
 [connection signal="timeout" from="TimerStart" to="." method="_on_timer_start_timeout"]
