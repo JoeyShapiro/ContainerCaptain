@@ -38,3 +38,7 @@ sprite_frames = SubResource("SpriteFrames_uaig3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_p445x")
+
+[node name="TimerShoot" type="Timer" parent="."]
+
+[connection signal="timeout" from="TimerShoot" to="." method="_on_timer_shoot_timeout"]
