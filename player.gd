@@ -56,15 +56,28 @@ func start(pos):
 
 func shoot():
 	var enemies = get_tree().get_nodes_in_group('enemy')
-	var bullet = bullet_scene.instantiate()
-	bullet.position = position
-	var r = get_angle_to(enemies[0].position)
-	# dont care about rotation
-	bullet.direction = Vector2(cos(r), sin(r))
-	bullet.speed = 4
-	bullet.damage = 1
 	
-	get_node('../').add_child(bullet)
+	# find the nearest enemy
+	var nearest_enemy = null # dont need to solve this now
+	var nearest_mag = INF # so i dont have to do it everytime
+	for enemy in enemies:
+		var e_mag = position.distance_to(enemy.position)
+		if e_mag < nearest_mag:
+			nearest_enemy = enemy
+			nearest_mag = e_mag
+	
+	# better than len(enemies)
+	if nearest_enemy:
+		var bullet = bullet_scene.instantiate()
+		bullet.position = position
+		# Vector2.direction_to -_-
+		var r = get_angle_to(enemies[0].position)
+		# dont care about rotation
+		bullet.direction = Vector2(cos(r), sin(r))
+		bullet.speed = 4
+		bullet.damage = 1
+		
+		get_node('../').add_child(bullet)
 
 
 func _on_timer_shoot_timeout():
