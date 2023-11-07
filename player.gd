@@ -5,6 +5,7 @@ signal hit
 @export var hull = 100
 @export var gold = 100 # energy
 @export var resources = 0 # TODO should i swap these or something
+@export var bullet_scene : PackedScene
 
 var screen_size # Size of the game window.
 
@@ -24,6 +25,7 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+		shoot()
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -49,3 +51,11 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+
+func shoot():
+	# cool effect, but not what i want
+	var bullet = bullet_scene.instantiate()
+	bullet.position = position
+	bullet.velocity = Vector2(1, 0)
+	
+	get_node('../').add_child(bullet)

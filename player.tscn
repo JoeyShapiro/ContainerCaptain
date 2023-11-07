@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1dggx807wm0g"]
+[gd_scene load_steps=6 format=3 uid="uid://c1dggx807wm0g"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_uaiom"]
 [ext_resource type="Texture2D" uid="uid://dpbvgo00e1uty" path="res://freighter.png" id="2_o0l43"]
+[ext_resource type="PackedScene" uid="uid://cibem5vqpeyps" path="res://bullet.tscn" id="2_rmgub"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uaig3"]
 animations = [{
@@ -25,6 +26,7 @@ height = 132.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uaiom")
+bullet_scene = ExtResource("2_rmgub")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
