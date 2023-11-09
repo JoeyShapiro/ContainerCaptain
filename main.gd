@@ -54,10 +54,8 @@ func _on_timer_start_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
 
-
 func _on_player_hit():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
-
 
 func _on_player_stat_change():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)

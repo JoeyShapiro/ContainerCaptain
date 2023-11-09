@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://6mt6cmpr15eb"]
+
+[ext_resource type="Script" path="res://droneRam.gd" id="1_3haql"]
+[ext_resource type="Texture2D" uid="uid://k20yuhqicv6e" path="res://boat.png" id="4_2paky"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tqc1f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2paky")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_msnas"]
+radius = 38.0
+height = 128.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["drone"]]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_3haql")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0, 1, 1)
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_tqc1f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_msnas")

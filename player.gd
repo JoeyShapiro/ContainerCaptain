@@ -7,6 +7,7 @@ signal stat_change
 @export var max_gold = 100 # energy
 @export var resources = 0 # TODO should i swap these or something
 @export var bullet_scene : PackedScene
+@export var droneRam_scene : PackedScene
 
 var hull
 var gold
@@ -91,7 +92,11 @@ func shoot():
 		get_node('../').add_child(bullet)
 
 func _on_timer_shoot_timeout():
-	shoot()
+	#shoot()
+	if len(get_tree().get_nodes_in_group('drone')) < 1:
+		var droneRam = droneRam_scene.instantiate()
+		droneRam.position = position
+		get_node('../').add_child(droneRam)
 
 func on_pickup(item):
 	# TODO make class for pickups
@@ -103,3 +108,6 @@ func on_pickup(item):
 	elif item == 'gold' and gold < max_gold:
 		gold += 1 # TODO this has hidden functionality
 	stat_change.emit()
+	var droneRam = droneRam_scene.instantiate()
+	droneRam.position = position
+	get_node('../').add_child(droneRam)
