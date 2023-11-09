@@ -9,6 +9,6 @@ func _process(delta):
 	pass
 
 func display_stats(health, gold, resources):
-	$VBoxContainer/LabelHealth.text = '🛟: ' + str(health)
-	$VBoxContainer/LabelGold.text = '💎: ' + str(gold)
-	$VBoxContainer/LabelResources.text = '🪵: ' + str(resources)
+	$Stats/LabelHealth.text = '🛟: ' + str(health)
+	$Stats/LabelGold.text = '💎: ' + str(gold)
+	$Stats/LabelResources.text = '🪵: ' + str(resources)

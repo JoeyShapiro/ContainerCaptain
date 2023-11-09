@@ -5,20 +5,46 @@
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_lfbkd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Stats" type="VBoxContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="LabelHealth" type="Label" parent="VBoxContainer"]
+[node name="LabelHealth" type="Label" parent="Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 
-[node name="LabelGold" type="Label" parent="VBoxContainer"]
+[node name="LabelGold" type="Label" parent="Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 
-[node name="LabelResources" type="Label" parent="VBoxContainer"]
+[node name="LabelResources" type="Label" parent="Stats"]
 layout_mode = 2
 tooltip_text = "Resources allow the purchase of upgrades"
 mouse_filter = 0
 theme_override_font_sizes/font_size = 32
+
+[node name="Units" type="VBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 59.0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Units"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Units/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Ram"
+
+[node name="Button" type="Button" parent="Units/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="Button2" type="Button" parent="Units/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
