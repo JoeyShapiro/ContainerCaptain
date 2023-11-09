@@ -44,4 +44,7 @@ shape = SubResource("CapsuleShape2D_p445x")
 [node name="TimerShoot" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="TimerRent" type="Timer" parent="."]
+
 [connection signal="timeout" from="TimerShoot" to="." method="_on_timer_shoot_timeout"]
+[connection signal="timeout" from="TimerRent" to="." method="_on_timer_rent_timeout"]

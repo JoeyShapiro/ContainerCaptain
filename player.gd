@@ -20,6 +20,7 @@ var screen_size # Size of the game window.
 func _ready():
 	screen_size = get_viewport_rect().size
 	$TimerShoot.start()
+	$TimerRent.start()
 	
 	hull = max_hull
 	gold = max_gold
@@ -111,3 +112,10 @@ func on_pickup(item):
 	var droneRam = droneRam_scene.instantiate()
 	droneRam.position = position
 	get_node('../').add_child(droneRam)
+
+# do it this way is cheaper (one timer) and makes sense (pay all at once)
+# maybe be in them, so each goes down correctly
+# nah
+func _on_timer_rent_timeout():
+	var n_drones = len(get_tree().get_nodes_in_group('drone'))
+	gold -= n_drones
