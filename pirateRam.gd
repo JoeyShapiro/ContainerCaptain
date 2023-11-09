@@ -2,9 +2,13 @@ extends CharacterBody2D
 
 @export var path_to_player = '../Player'
 var player
+
 @export var ram_cooldown = 1
 var ram_timer
 @export var speed = 2
+@export var max_hull = 20
+@export var damage = 5
+var hull
 
 @export var resource_scene : PackedScene
 @export var gold_scene : PackedScene
@@ -13,9 +17,13 @@ var ram_timer
 func _ready():
 	player = get_node(path_to_player) # seems bad, but eh
 	ram_timer = 0.001 # TODO so the first hit counts
+	hull = max_hull
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if hull <= 0:
+		on_destroy()
+	
 	var r = get_angle_to(player.position)
 	
 	rotation += r
@@ -34,11 +42,14 @@ func _physics_process(delta):
 	var collision_body = move_and_collide(velocity * delta)
 	if collision_body:
 		if ram_timer <= 0 and collision_body.get_collider().has_method("on_hit"):
-			collision_body.get_collider().on_hit(1)
+			collision_body.get_collider().on_hit(damage)
 			position -= velocity * speed * 15
 		ram_timer = ram_cooldown
 
 func on_hit(damage):
+	hull -= damage
+
+func on_destroy():
 	var drop = gold_scene.instantiate()
 	if (randi() % 100) > 80:
 		drop = resource_scene.instantiate()

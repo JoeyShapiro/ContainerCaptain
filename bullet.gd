@@ -19,6 +19,6 @@ func _physics_process(delta):
 	var collision_body = move_and_collide(velocity * delta)
 	if collision_body:
 		if collision_body.get_collider().has_method("on_hit"):
-			collision_body.get_collider().on_hit(1)
+			collision_body.get_collider().on_hit(damage)
 			position -= velocity * speed * 15
 		queue_free()

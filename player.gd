@@ -3,10 +3,15 @@ signal hit
 signal stat_change
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
-@export var hull = 100
-@export var gold = 100 # energy
+@export var max_hull = 100
+@export var max_gold = 100 # energy
 @export var resources = 0 # TODO should i swap these or something
 @export var bullet_scene : PackedScene
+
+var hull
+var gold
+var damage
+var vacuum_range
 
 var screen_size # Size of the game window.
 
@@ -14,6 +19,11 @@ var screen_size # Size of the game window.
 func _ready():
 	screen_size = get_viewport_rect().size
 	$TimerShoot.start()
+	
+	hull = max_hull
+	gold = max_gold
+	damage = 10
+	vacuum_range = 2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -76,7 +86,7 @@ func shoot():
 		# dont care about rotation
 		bullet.direction = Vector2(cos(r), sin(r))
 		bullet.speed = 4
-		bullet.damage = 1
+		bullet.damage = damage
 		
 		get_node('../').add_child(bullet)
 
@@ -90,6 +100,6 @@ func on_pickup(item):
 	print('collected ', item)
 	if item == 'resource':
 		resources += 1
-	elif item == 'gold':
-		gold += 1
+	elif item == 'gold' and gold < max_gold:
+		gold += 1 # TODO this has hidden functionality
 	stat_change.emit()
