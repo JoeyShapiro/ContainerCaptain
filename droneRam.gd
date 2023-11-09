@@ -8,6 +8,7 @@ var ram_timer
 @export var speed = 2
 @export var max_hull = 10
 @export var damage = 5
+@export var cost = 1
 var hull
 
 @export var resource_scene : PackedScene

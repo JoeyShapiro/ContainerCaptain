@@ -117,5 +117,9 @@ func on_pickup(item):
 # maybe be in them, so each goes down correctly
 # nah
 func _on_timer_rent_timeout():
-	var n_drones = len(get_tree().get_nodes_in_group('drone'))
-	gold -= n_drones
+	var drones = get_tree().get_nodes_in_group('drone')
+	for drone in drones:
+		if gold - drone.cost > 0:
+			gold -= drone.cost
+		else:
+			drone.on_destroy()
