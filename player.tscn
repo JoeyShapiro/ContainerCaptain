@@ -40,5 +40,6 @@ sprite_frames = SubResource("SpriteFrames_uaig3")
 shape = SubResource("CapsuleShape2D_p445x")
 
 [node name="TimerShoot" type="Timer" parent="."]
+wait_time = 2.0
 
 [connection signal="timeout" from="TimerShoot" to="." method="_on_timer_shoot_timeout"]

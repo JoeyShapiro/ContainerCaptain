@@ -84,6 +84,12 @@ func _on_timer_shoot_timeout():
 	shoot()
 
 func on_pickup(item):
+	# TODO make class for pickups
+	# ... make always give gold, but not other stuff
+	# ... gold has vacuum
 	print('collected ', item)
-	resources += 1
+	if item == 'resource':
+		resources += 1
+	elif item == 'gold':
+		gold += 1
 	stat_change.emit()
