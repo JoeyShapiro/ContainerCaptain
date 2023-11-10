@@ -34,17 +34,20 @@ grow_vertical = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="Units"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Units/HBoxContainer"]
+[node name="LabelInfo" type="Label" parent="Units/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Ram"
 
-[node name="Button" type="Button" parent="Units/HBoxContainer"]
+[node name="ScaleDown" type="Button" parent="Units/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "<"
 
-[node name="Button2" type="Button" parent="Units/HBoxContainer"]
+[node name="ScaleUp" type="Button" parent="Units/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = ">"
+
+[connection signal="pressed" from="Units/HBoxContainer/ScaleDown" to="." method="_on_scale_down_pressed"]
+[connection signal="pressed" from="Units/HBoxContainer/ScaleUp" to="." method="_on_scale_up_pressed"]

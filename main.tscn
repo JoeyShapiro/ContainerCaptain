@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://daojnt5ue41f"]
+[gd_scene load_steps=9 format=3 uid="uid://daojnt5ue41f"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_45dk6"]
 [ext_resource type="PackedScene" uid="uid://c1dggx807wm0g" path="res://player.tscn" id="1_ijd0x"]
 [ext_resource type="PackedScene" uid="uid://bwnudvv2w1r8r" path="res://pirateRam.tscn" id="2_iel74"]
+[ext_resource type="PackedScene" uid="uid://6mt6cmpr15eb" path="res://droneRam.tscn" id="3_8t2rh"]
 [ext_resource type="PackedScene" uid="uid://rw5ec1cqiwvk" path="res://hud.tscn" id="4_8pyms"]
 [ext_resource type="Shader" path="res://water.gdshader" id="5_7aeye"]
 
@@ -19,6 +20,7 @@ shader_parameter/scale = Vector2(10, 10)
 [node name="Main" type="Node"]
 script = ExtResource("1_45dk6")
 mob_scene = ExtResource("2_iel74")
+droneRam_scene = ExtResource("3_8t2rh")
 
 [node name="Player" parent="." instance=ExtResource("1_ijd0x")]
 
@@ -53,3 +55,5 @@ grow_vertical = 2
 [connection signal="stat_change" from="Player" to="." method="_on_player_stat_change"]
 [connection signal="timeout" from="TimerMob" to="." method="_on_timer_mob_timeout"]
 [connection signal="timeout" from="TimerStart" to="." method="_on_timer_start_timeout"]
+[connection signal="scale_down" from="Hud" to="." method="_on_hud_scale_down"]
+[connection signal="scale_up" from="Hud" to="." method="_on_hud_scale_up"]

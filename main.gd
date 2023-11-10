@@ -1,6 +1,7 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var droneRam_scene : PackedScene
 var score
 
 # Called when the node enters the scene tree for the first time.
@@ -59,3 +60,12 @@ func _on_player_hit():
 
 func _on_player_stat_change():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
+
+func _on_hud_scale_up():
+	var droneRam = droneRam_scene.instantiate()
+	droneRam.position = $Player.position
+	get_node('.').add_child(droneRam)
+
+func _on_hud_scale_down():
+	var drones = get_tree().get_nodes_in_group('drone')
+	drones[0].on_destroy()
