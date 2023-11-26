@@ -5,6 +5,17 @@ extends Node
 @export var drone_options : Array[Dictionary]
 var score
 
+# TODO
+"""
+- different drones
+- scale
+- leveling
+- progress bars
+- fix ui
+- clean functions
+- validate input and stuff
+"""
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	drone_options.append({
