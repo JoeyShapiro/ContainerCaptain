@@ -6,6 +6,7 @@ signal scale_up(drone_type)
 # this is fine for now, but should be dynamic from main
 # can still use it here
 @export var drone_options : Array[Dictionary]
+var selected_option
 
 # seems best most pratical way
 # menu items call parent with item
@@ -20,12 +21,32 @@ signal scale_up(drone_type)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	selected_option = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_pressed("menu_up"):
-		pass
+	if Input.is_action_just_pressed("menu_up"):
+		$Units.get_child(selected_option).toggle()
+		selected_option -= 1
+		if selected_option > len(drone_options)-1:
+			selected_option = 0
+		if selected_option < 0:
+			selected_option = len(drone_options)-1
+		$Units.get_child(selected_option).toggle()
+	if Input.is_action_just_pressed("menu_down"):
+		$Units.get_child(selected_option).toggle()
+		selected_option += 1
+		# TODO might be euclid or something
+		# just need to work it out
+		if selected_option > len(drone_options)-1:
+			selected_option = 0
+		if selected_option < 0:
+			selected_option = len(drone_options)-1
+		$Units.get_child(selected_option).toggle()
+	if Input.is_action_just_pressed("menu_scale_down"):
+		$Units.get_child(selected_option)._on_scale_down_pressed()
+	if Input.is_action_just_pressed("menu_scale_up"):
+		$Units.get_child(selected_option)._on_scale_up_pressed()
 
 func display_stats(health, gold, resources):
 	$Stats/LabelHealth.text = '🛟: ' + str(health)
@@ -38,7 +59,9 @@ func update_units(drone_options):
 		var scale_context = scale_context_scene.instantiate()
 		scale_context.drone = drone_option
 		$Units.add_child(scale_context)
-	print($Units.get_child_count())
+	
+	selected_option = 0
+	$Units.get_child(selected_option).toggle()
 
 func on_scale_down(drone_option):
 	scale_down.emit(drone_option)

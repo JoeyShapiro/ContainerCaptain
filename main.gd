@@ -12,6 +12,11 @@ func _ready():
 		'rent': 1,
 		'scene': 'res://droneRam.tscn'
 	})
+	drone_options.append({
+		'type': 'oram',
+		'rent': 1,
+		'scene': 'res://droneRam.tscn'
+	})
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
