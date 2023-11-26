@@ -1,14 +1,12 @@
 extends HBoxContainer
 
 # could give this a packed scene, but this is fine for now
-# no diff between scene and string
-@export var drone_scene = ''
-@export var drone_type = ''
-@export var drone_rent = 0
+# doesnt need the scene, and cant really use it
+@export var drone : Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$LabelInfo.text = drone_type + ' (' + str(drone_rent) + ')'
+	$LabelInfo.text = drone.type + ' (' + str(drone.rent) + ')'
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -16,7 +14,7 @@ func _process(delta):
 
 # should emit or something
 func _on_scale_down_pressed():
-	get_node('../../').on_scale_down(drone_scene)
+	get_node('../../').on_scale_down(drone)
 
 func _on_scale_up_pressed():
-	get_node('../../').on_scale_up(drone_scene)
+	get_node('../../').on_scale_up(drone)

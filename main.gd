@@ -2,10 +2,16 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var droneRam_scene : PackedScene
+@export var drone_options : Array[Dictionary]
 var score
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	drone_options.append({
+		'type': 'ram',
+		'rent': 1,
+		'scene': 'res://droneRam.tscn'
+	})
 	new_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,6 +29,9 @@ func new_game():
 	$TimerMob.start()
 	
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
+	$Hud.drone_options = drone_options
+	# TODO ugly
+	$Hud.update_units(drone_options)
 
 func _on_timer_mob_timeout():
 	# Create a new instance of the Mob scene.
@@ -61,13 +70,13 @@ func _on_player_hit():
 func _on_player_stat_change():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
 
-func _on_hud_scale_up(drone_scene):
-	var drone = droneRam_scene.instantiate()
+func _on_hud_scale_up(drone_option):
+	# TODO does this need to be unloaded
+	# maybe do a PackedScenes, but this is programmatic
+	var drone = load(drone_option['scene']).instantiate()
 	drone.position = $Player.position
-	get_node('.').add_child(drone)
-	print('up', drone.name)
+	add_child(drone)
 
-func _on_hud_scale_down(drone_scene):
+func _on_hud_scale_down(drone_option):
 	var drones = get_tree().get_nodes_in_group('drone')
-	print('down', drones[0].name)
 	drones[0].on_destroy()

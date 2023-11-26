@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://rw5ec1cqiwvk"]
+[gd_scene load_steps=2 format=3 uid="uid://rw5ec1cqiwvk"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_lfbkd"]
-[ext_resource type="PackedScene" uid="uid://6mt6cmpr15eb" path="res://droneRam.tscn" id="2_vppvn"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_lfbkd")
-drone_scenes = Array[PackedScene]([ExtResource("2_vppvn")])
 
 [node name="Stats" type="VBoxContainer" parent="."]
 offset_right = 40.0
