@@ -1,9 +1,11 @@
 extends CanvasLayer
 
-signal scale_down
-signal scale_up
+signal scale_down(drone_scene)
+signal scale_up(drone_scene)
 
-# list of packed scenes
+# this is fine for now, but should be dynamic from main
+# can still use it here
+@export var drone_scenes : Array[PackedScene]
 
 # seems best most pratical way
 # menu items call parent with item
@@ -12,23 +14,19 @@ signal scale_up
 # hud emits
 # main catches
 
-# x each menu item has an emit caught by parent/main
-# cant be dynamic
-
-# x menu items call root function
-# bad practice
-
-# x everyone keeps emitting and pass it up
-# to much flow control
-# either way items store and send scene
-
 # drones stop moving if no pay
 
 # scale game with scale of window
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var scale_context_scene = preload('res://scaleContext.tscn')
+	for drone_scene in drone_scenes:
+		var scale_context = scale_context_scene.instantiate()
+		scale_context.drone_scene = drone_scene
+		scale_context.drone_type = 'ram'
+		$Units.add_child(scale_context)
+	print($Units.get_child_count())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -39,8 +37,8 @@ func display_stats(health, gold, resources):
 	$Stats/LabelGold.text = '💎: ' + str(gold)
 	$Stats/LabelResources.text = '🪵: ' + str(resources)
 
-func _on_scale_down_pressed():
-	scale_down.emit()
+func on_scale_down(drone_scene):
+	scale_down.emit(drone_scene)
 
-func _on_scale_up_pressed():
-	scale_up.emit()
+func on_scale_up(drone_scene):
+	scale_up.emit(drone_scene)

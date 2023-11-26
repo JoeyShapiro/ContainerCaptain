@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://d37t8e8afp7il"]
+
+[ext_resource type="Script" path="res://ScaleContext.gd" id="1_et4u2"]
+
+[node name="ScaleContext" type="HBoxContainer"]
+script = ExtResource("1_et4u2")
+
+[node name="LabelInfo" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="ScaleDown" type="Button" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="ScaleUp" type="Button" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[connection signal="pressed" from="ScaleDown" to="." method="_on_scale_down_pressed"]
+[connection signal="pressed" from="ScaleUp" to="." method="_on_scale_up_pressed"]

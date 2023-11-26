@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://rw5ec1cqiwvk"]
+[gd_scene load_steps=3 format=3 uid="uid://rw5ec1cqiwvk"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_lfbkd"]
+[ext_resource type="PackedScene" uid="uid://6mt6cmpr15eb" path="res://droneRam.tscn" id="2_vppvn"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_lfbkd")
+drone_scenes = Array[PackedScene]([ExtResource("2_vppvn")])
 
 [node name="Stats" type="VBoxContainer" parent="."]
 offset_right = 40.0
@@ -30,24 +32,3 @@ anchor_bottom = 1.0
 offset_top = -40.0
 offset_right = 59.0
 grow_vertical = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Units"]
-layout_mode = 2
-
-[node name="LabelInfo" type="Label" parent="Units/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Ram"
-
-[node name="ScaleDown" type="Button" parent="Units/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "<"
-
-[node name="ScaleUp" type="Button" parent="Units/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = ">"
-
-[connection signal="pressed" from="Units/HBoxContainer/ScaleDown" to="." method="_on_scale_down_pressed"]
-[connection signal="pressed" from="Units/HBoxContainer/ScaleUp" to="." method="_on_scale_up_pressed"]
