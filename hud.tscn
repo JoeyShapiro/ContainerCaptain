@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://rw5ec1cqiwvk"]
+[gd_scene load_steps=5 format=3 uid="uid://rw5ec1cqiwvk"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_lfbkd"]
+[ext_resource type="AudioStream" uid="uid://dccx8fu5tdo6f" path="res://Sounds/wpn_select.wav" id="2_4aqca"]
+[ext_resource type="AudioStream" uid="uid://dpddapxi5uvo2" path="res://Sounds/wpn_moveselect.wav" id="3_7la4j"]
+[ext_resource type="AudioStream" uid="uid://drqfvnk2is2xb" path="res://Sounds/wpn_denyselect.wav" id="4_1vg2a"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_lfbkd")
+sound_select = ExtResource("2_4aqca")
+sound_scale_up = ExtResource("3_7la4j")
+sound_scale_down = ExtResource("4_1vg2a")
 
 [node name="Stats" type="VBoxContainer" parent="."]
 offset_right = 40.0
@@ -30,3 +36,7 @@ anchor_bottom = 1.0
 offset_top = -40.0
 offset_right = 59.0
 grow_vertical = 0
+
+[node name="HudAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_4aqca")
+volume_db = -10.0

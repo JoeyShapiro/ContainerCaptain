@@ -7,6 +7,9 @@ signal scale_up(drone_type)
 # can still use it here
 @export var drone_options : Array[Dictionary]
 var selected_option
+@export var sound_select : AudioStream
+@export var sound_scale_up : AudioStream
+@export var sound_scale_down: AudioStream
 
 # seems best most pratical way
 # menu items call parent with item
@@ -32,6 +35,8 @@ func _process(delta):
 			selected_option = 0
 		if selected_option < 0:
 			selected_option = len(drone_options)-1
+		$HudAudio.stream = sound_select
+		$HudAudio.play()
 		$Units.get_child(selected_option).toggle()
 	if Input.is_action_just_pressed("menu_down"):
 		$Units.get_child(selected_option).toggle()
@@ -42,11 +47,17 @@ func _process(delta):
 			selected_option = 0
 		if selected_option < 0:
 			selected_option = len(drone_options)-1
+		$HudAudio.stream = sound_select
+		$HudAudio.play()
 		$Units.get_child(selected_option).toggle()
 	if Input.is_action_just_pressed("menu_scale_down"):
 		$Units.get_child(selected_option)._on_scale_down_pressed()
+		$HudAudio.stream = sound_scale_down
+		$HudAudio.play()
 	if Input.is_action_just_pressed("menu_scale_up"):
 		$Units.get_child(selected_option)._on_scale_up_pressed()
+		$HudAudio.stream = sound_scale_up
+		$HudAudio.play()
 
 func display_stats(health, gold, resources):
 	$Stats/LabelHealth.text = '🛟: ' + str(health)
