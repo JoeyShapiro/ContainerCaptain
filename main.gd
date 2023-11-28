@@ -4,7 +4,7 @@ extends Node
 @export var droneRam_scene : PackedScene
 @export var drone_options : Array[Dictionary]
 
-var score
+var timer
 var difficulty_scale
 # could reverse it, but just make new value
 var difficulty_counter
@@ -52,14 +52,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	timer += delta
 
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 
 func new_game():
-	score = 0
+	timer = 0
 	difficulty_counter = 0
 	$Player.start($PlayerStartPos.position)
 	$Difficulty.start()
@@ -96,12 +96,6 @@ func _on_timer_mob_timeout():
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
-
-func _on_timer_start_timeout():
-	# is this doing anything
-	print('hello?')
-	$MobTimer.start()
-	$ScoreTimer.start()
 
 func _on_difficulty_timeout():
 	difficulty_counter += 1

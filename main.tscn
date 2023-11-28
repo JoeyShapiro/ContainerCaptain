@@ -30,10 +30,6 @@ position = Vector2(240, 450)
 [node name="TimerMob" type="Timer" parent="."]
 wait_time = 2.0
 
-[node name="TimerStart" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="PathMob" type="Path2D" parent="."]
 curve = SubResource("Curve2D_7txy2")
 
@@ -52,11 +48,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Difficulty" type="Timer" parent="."]
+wait_time = 10.0
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="stat_change" from="Player" to="." method="_on_player_stat_change"]
 [connection signal="timeout" from="TimerMob" to="." method="_on_timer_mob_timeout"]
-[connection signal="timeout" from="TimerStart" to="." method="_on_timer_start_timeout"]
 [connection signal="scale_down" from="Hud" to="." method="_on_hud_scale_down"]
 [connection signal="scale_up" from="Hud" to="." method="_on_hud_scale_up"]
 [connection signal="timeout" from="Difficulty" to="." method="_on_difficulty_timeout"]
