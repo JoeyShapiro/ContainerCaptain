@@ -5,7 +5,7 @@ var player
 
 @export var ram_cooldown = 1
 var ram_timer
-@export var speed = 2
+@export var speed = 0.75
 @export var max_hull = 10
 @export var damage = 5
 var hull

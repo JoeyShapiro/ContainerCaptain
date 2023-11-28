@@ -3,17 +3,27 @@ extends Node
 @export var mob_scene: PackedScene
 @export var droneRam_scene : PackedScene
 @export var drone_options : Array[Dictionary]
+
 var score
+var difficulty_scale
+# could reverse it, but just make new value
+var difficulty_counter
 
 # TODO
 """
 - different drones
-- scale
+- scale game window
 - leveling
 - progress bars
-- fix ui
+- fix ui (look half decent)
 - clean functions
-- validate input and stuff
+- validate input and stuff (scaling ui)
+- scale difficulty
+- better art
+- more sounds
+  - sound when pay
+  - bool check if can pay
+  - stop moving or soemthing
 """
 
 # Called when the node enters the scene tree for the first time.
@@ -24,8 +34,18 @@ func _ready():
 		'scene': 'res://droneRam.tscn'
 	})
 	drone_options.append({
-		'type': 'oram',
-		'rent': 1,
+		'type': 'gaurd',
+		'rent': 3,
+		'scene': 'res://droneRam.tscn'
+	})
+	drone_options.append({
+		'type': 'shooter',
+		'rent': 5,
+		'scene': 'res://droneRam.tscn'
+	})
+	drone_options.append({
+		'type': 'taunt',
+		'rent': 10,
 		'scene': 'res://droneRam.tscn'
 	})
 	new_game()
@@ -40,8 +60,9 @@ func game_over():
 
 func new_game():
 	score = 0
+	difficulty_counter = 0
 	$Player.start($PlayerStartPos.position)
-	#$StartTimer.start()
+	$Difficulty.start()
 	$TimerMob.start()
 	
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
@@ -77,8 +98,16 @@ func _on_timer_mob_timeout():
 	add_child(mob)
 
 func _on_timer_start_timeout():
+	# is this doing anything
+	print('hello?')
 	$MobTimer.start()
 	$ScoreTimer.start()
+
+func _on_difficulty_timeout():
+	difficulty_counter += 1
+	difficulty_scale = 3 * log(difficulty_counter + 1)
+	$TimerMob.wait_time = 4 / (1 * difficulty_scale)
+	print($TimerMob.wait_time)
 
 func _on_player_hit():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
