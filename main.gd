@@ -4,6 +4,10 @@ extends Node
 @export var droneRam_scene : PackedScene
 @export var drone_options : Array[Dictionary]
 
+@export var sfx_collect_gold : AudioStream
+@export var sfx_collect_res : AudioStream
+@export var sfx_pay_rent : AudioStream
+
 var timer
 var difficulty_scale
 # could reverse it, but just make new value
@@ -18,7 +22,7 @@ var difficulty_counter
 - fix ui (look half decent)
 - clean functions
 - validate input and stuff (scaling ui)
-- scale difficulty
+- timer on hud
 - better art
 - more sounds
   - sound when pay
@@ -61,6 +65,7 @@ func game_over():
 func new_game():
 	timer = 0
 	difficulty_counter = 0
+	difficulty_scale = 0.5
 	$Player.start($PlayerStartPos.position)
 	$Difficulty.start()
 	$TimerMob.start()
@@ -73,6 +78,8 @@ func new_game():
 func _on_timer_mob_timeout():
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
+	mob.max_hull *= difficulty_scale
+	mob.damage *= difficulty_scale
 	#if len(get_tree().get_nodes_in_group('enemy')):
 	#	return
 
@@ -99,9 +106,9 @@ func _on_timer_mob_timeout():
 
 func _on_difficulty_timeout():
 	difficulty_counter += 1
-	difficulty_scale = 3 * log(difficulty_counter + 1)
+	difficulty_scale = snapped(1 / (1+3*exp(-(difficulty_counter-3))), 0.01)
 	$TimerMob.wait_time = 4 / (1 * difficulty_scale)
-	print($TimerMob.wait_time)
+	print(difficulty_scale)
 
 func _on_player_hit():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
