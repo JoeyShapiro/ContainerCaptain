@@ -36,6 +36,7 @@ var difficulty_counter
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Menu.show()
+	$Player.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -52,6 +53,7 @@ func game_over():
 	$Menu.show()
 
 func new_game():
+	$Player.show()
 	$Menu.hide()
 	timer = 0
 	difficulty_counter = 0
@@ -118,7 +120,7 @@ func _on_timer_mob_timeout():
 
 func _on_difficulty_timeout():
 	difficulty_counter += 1
-	difficulty_scale = snapped(3 / (1+exp(-(difficulty_counter-3))), 0.01)
+	difficulty_scale = snapped(3 / (1+exp(-(0.3*difficulty_counter-3))), 0.01)
 	$TimerMob.wait_time = 1 / (difficulty_scale)
 	$Hud.update_difficulty(difficulty_scale)
 
