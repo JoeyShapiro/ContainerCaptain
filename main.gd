@@ -47,6 +47,10 @@ func _process(delta):
 	$Hud.update_timer(timer)
 
 func game_over():
+	var enemies = get_tree().get_nodes_in_group('enemy')
+	for enemy in enemies:
+		enemy.on_destroy()
+	
 	$Difficulty.stop()
 	$TimerMob.stop()
 	
@@ -130,6 +134,9 @@ func _on_player_hit():
 func _on_player_stat_change():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
 
+func _on_player_destroy():
+	game_over()
+
 func _on_hud_scale_up(drone_option):
 	# TODO does this need to be unloaded
 	# maybe do a PackedScenes, but this is programmatic
@@ -140,9 +147,6 @@ func _on_hud_scale_up(drone_option):
 func _on_hud_scale_down(drone_option):
 	var drones = get_tree().get_nodes_in_group('drone')
 	drones[0].on_destroy()
-
-func _on_player_destroy():
-	game_over()
 
 func _on_menu_new_game():
 	new_game()

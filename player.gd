@@ -64,7 +64,6 @@ func on_hit(damage):
 	
 	if hull <= 0:
 		destroy.emit()
-		queue_free()
 
 func start(pos):
 	position = pos
