@@ -1,6 +1,7 @@
 extends CharacterBody2D
 signal hit
 signal stat_change
+signal destroy
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
 @export var max_hull = 100
@@ -60,6 +61,10 @@ func on_hit(damage):
 	hit.emit()
 	hull -= damage
 	stat_change.emit()
+	
+	if hull <= 0:
+		destroy.emit()
+		queue_free()
 
 func start(pos):
 	position = pos

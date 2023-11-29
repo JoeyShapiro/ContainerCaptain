@@ -18,22 +18,47 @@ var difficulty_counter
 - different drones
 - scale game window
 - game over
+- fix difficulty
 - leveling
 - progress bars
 - fix ui (look half decent)
 - clean functions
 - validate input and stuff (scaling ui)
-- timer on hud - 
-- difficulty on hud -
 - better art
 - more sounds -
   - sound when pay
   - bool check if can pay
   - stop moving or soemthing
+- damage numbers
+  - numbers of rent
 """
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Menu.show()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if $Menu.visible:
+		return
+	
+	timer += delta
+	$Hud.update_timer(timer)
+
+func game_over():
+	$ScoreTimer.stop()
+	$MobTimer.stop()
+	$Menu.show()
+
+func new_game():
+	$Menu.hide()
+	timer = 0
+	difficulty_counter = 0
+	difficulty_scale = 0
+	$Player.start($PlayerStartPos.position)
+	$Difficulty.start()
+	$TimerMob.start()
+	
 	drone_options.append({
 		'type': 'ram',
 		'rent': 1,
@@ -54,23 +79,6 @@ func _ready():
 		'rent': 10,
 		'scene': 'res://droneRam.tscn'
 	})
-	new_game()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	timer += delta
-
-func game_over():
-	$ScoreTimer.stop()
-	$MobTimer.stop()
-
-func new_game():
-	timer = 0
-	difficulty_counter = 0
-	difficulty_scale = 0.5
-	$Player.start($PlayerStartPos.position)
-	$Difficulty.start()
-	$TimerMob.start()
 	
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
 	$Hud.update_difficulty(difficulty_scale)
@@ -110,7 +118,8 @@ func _on_timer_mob_timeout():
 func _on_difficulty_timeout():
 	difficulty_counter += 1
 	difficulty_scale = snapped(1 / (1+3*exp(-(difficulty_counter-3))), 0.01)
-	$TimerMob.wait_time = 4 / (1 * difficulty_scale)
+	$TimerMob.wait_time = 1 / (difficulty_scale)
+	print($TimerMob.wait_time)
 	$Hud.update_difficulty(difficulty_scale)
 
 func _on_player_hit():
@@ -129,3 +138,9 @@ func _on_hud_scale_up(drone_option):
 func _on_hud_scale_down(drone_option):
 	var drones = get_tree().get_nodes_in_group('drone')
 	drones[0].on_destroy()
+
+func _on_player_destroy():
+	game_over()
+
+func _on_menu_new_game():
+	new_game()

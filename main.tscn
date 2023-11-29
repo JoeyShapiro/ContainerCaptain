@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://daojnt5ue41f"]
+[gd_scene load_steps=10 format=3 uid="uid://daojnt5ue41f"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_45dk6"]
 [ext_resource type="PackedScene" uid="uid://c1dggx807wm0g" path="res://player.tscn" id="1_ijd0x"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://6mt6cmpr15eb" path="res://droneRam.tscn" id="3_8t2rh"]
 [ext_resource type="PackedScene" uid="uid://rw5ec1cqiwvk" path="res://hud.tscn" id="4_8pyms"]
 [ext_resource type="Shader" path="res://water.gdshader" id="5_7aeye"]
+[ext_resource type="PackedScene" uid="uid://cn86sp774x3y4" path="res://menu.tscn" id="7_vxl73"]
 
 [sub_resource type="Curve2D" id="Curve2D_7txy2"]
 _data = {
@@ -48,11 +49,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Difficulty" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 2.0
 
+[node name="Menu" parent="." instance=ExtResource("7_vxl73")]
+
+[connection signal="destroy" from="Player" to="." method="_on_player_destroy"]
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="stat_change" from="Player" to="." method="_on_player_stat_change"]
 [connection signal="timeout" from="TimerMob" to="." method="_on_timer_mob_timeout"]
 [connection signal="scale_down" from="Hud" to="." method="_on_hud_scale_down"]
 [connection signal="scale_up" from="Hud" to="." method="_on_hud_scale_up"]
 [connection signal="timeout" from="Difficulty" to="." method="_on_difficulty_timeout"]
+[connection signal="new_game" from="Menu" to="." method="_on_menu_new_game"]
