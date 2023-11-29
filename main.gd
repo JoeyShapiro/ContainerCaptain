@@ -49,7 +49,7 @@ func _process(delta):
 func game_over():
 	var enemies = get_tree().get_nodes_in_group('enemy')
 	for enemy in enemies:
-		enemy.on_destroy()
+		enemy.queue_free()
 	
 	$Difficulty.stop()
 	$TimerMob.stop()

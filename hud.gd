@@ -65,6 +65,10 @@ func display_stats(health, gold, resources):
 	$Stats/LabelResources.text = '🪵: ' + str(resources)
 
 func update_units(drone_options):
+	for unit in $Units.get_children():
+		$Units.remove_child(unit)
+		unit.queue_free()
+	
 	var scale_context_scene = preload('res://scaleContext.tscn')
 	for drone_option in drone_options:
 		var scale_context = scale_context_scene.instantiate()
