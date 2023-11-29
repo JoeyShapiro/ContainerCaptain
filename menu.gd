@@ -10,6 +10,9 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func _on_new_game_pressed():
 	new_game.emit()
+
+
+func _on_rich_text_label_meta_clicked(meta):
+	OS.shell_open(str(meta))

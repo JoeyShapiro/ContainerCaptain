@@ -15,21 +15,22 @@ var difficulty_counter
 
 # TODO
 """
-- different drones
+- different drones -
 - scale game window
-- game over
-- fix difficulty
 - leveling
+- tutorial
+  - readme.md
+- JoeyShapiro made this :)
 - progress bars
 - fix ui (look half decent)
 - clean functions
 - validate input and stuff (scaling ui)
 - better art
-- more sounds -
+- more sounds
   - sound when pay
   - bool check if can pay
   - stop moving or soemthing
-- damage numbers
+- damage numbers -
   - numbers of rent
 """
 

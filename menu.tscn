@@ -5,6 +5,29 @@
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_eup3s")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[code]# README.md
+
+## Instructions:
+- Destroy pirates
+- Collect Gold and Resources
+- Survive
+
+## Keys:
+move                  = wasd
+scale up/down = →/←
+select drone     = ↑/↓
+
+# I made [wave amp=50.0 freq=5.0 connected=1][rainbow freq=1.0 sat=0.8 val=0.8][url=https://www.github.com/JoeyShapiro/ContainerCaptain]this[/url][/rainbow][/wave] :)"
+fit_content = true
+
 [node name="NewGame" type="Button" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -20,4 +43,5 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "New Game"
 
+[connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
 [connection signal="pressed" from="NewGame" to="." method="_on_new_game_pressed"]
