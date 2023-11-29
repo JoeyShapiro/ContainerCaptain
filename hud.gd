@@ -7,6 +7,7 @@ signal scale_up(drone_type)
 # can still use it here
 @export var drone_options : Array[Dictionary]
 var selected_option
+var timer
 @export var sound_select : AudioStream
 @export var sound_scale_up : AudioStream
 @export var sound_scale_down: AudioStream
@@ -25,9 +26,14 @@ var selected_option
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	selected_option = 0
+	timer = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# close enough
+	timer += delta
+	$Stats/LabelTimer.text = '⏰: ' + str(snapped(timer, 1))
+	
 	if Input.is_action_just_pressed("menu_up"):
 		$Units.get_child(selected_option).toggle()
 		selected_option -= 1
@@ -73,6 +79,9 @@ func update_units(drone_options):
 	
 	selected_option = 0
 	$Units.get_child(selected_option).toggle()
+
+func update_difficulty(difficulty):
+	$Stats/LabelDifficulty.text = '😈: ' + str(difficulty)
 
 func on_scale_down(drone_option):
 	scale_down.emit(drone_option)

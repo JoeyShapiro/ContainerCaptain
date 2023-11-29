@@ -29,6 +29,18 @@ tooltip_text = "Resources allow the purchase of upgrades"
 mouse_filter = 0
 theme_override_font_sizes/font_size = 32
 
+[node name="LabelTimer" type="Label" parent="Stats"]
+layout_mode = 2
+tooltip_text = "Resources allow the purchase of upgrades"
+mouse_filter = 0
+theme_override_font_sizes/font_size = 32
+
+[node name="LabelDifficulty" type="Label" parent="Stats"]
+layout_mode = 2
+tooltip_text = "Resources allow the purchase of upgrades"
+mouse_filter = 0
+theme_override_font_sizes/font_size = 32
+
 [node name="Units" type="VBoxContainer" parent="."]
 anchors_preset = 2
 anchor_top = 1.0

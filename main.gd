@@ -17,14 +17,16 @@ var difficulty_counter
 """
 - different drones
 - scale game window
+- game over
 - leveling
 - progress bars
 - fix ui (look half decent)
 - clean functions
 - validate input and stuff (scaling ui)
-- timer on hud
+- timer on hud - 
+- difficulty on hud -
 - better art
-- more sounds
+- more sounds -
   - sound when pay
   - bool check if can pay
   - stop moving or soemthing
@@ -71,6 +73,7 @@ func new_game():
 	$TimerMob.start()
 	
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
+	$Hud.update_difficulty(difficulty_scale)
 	$Hud.drone_options = drone_options
 	# TODO ugly
 	$Hud.update_units(drone_options)
@@ -108,7 +111,7 @@ func _on_difficulty_timeout():
 	difficulty_counter += 1
 	difficulty_scale = snapped(1 / (1+3*exp(-(difficulty_counter-3))), 0.01)
 	$TimerMob.wait_time = 4 / (1 * difficulty_scale)
-	print(difficulty_scale)
+	$Hud.update_difficulty(difficulty_scale)
 
 func _on_player_hit():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
