@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://25jaf427ltu1"]
+
+[ext_resource type="Script" path="res://droneShooter.gd" id="1_rs580"]
+[ext_resource type="PackedScene" uid="uid://cibem5vqpeyps" path="res://bullet.tscn" id="2_im0c0"]
+[ext_resource type="Texture2D" uid="uid://k20yuhqicv6e" path="res://boat.png" id="2_l6k7e"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tqc1f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l6k7e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_msnas"]
+radius = 14.0
+height = 60.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["drone", "shooter"]]
+collision_layer = 8
+collision_mask = 13
+script = ExtResource("1_rs580")
+bullet_scene = ExtResource("2_im0c0")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_tqc1f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_msnas")
+
+[node name="TimerShoot" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="TimerShoot" to="." method="_on_timer_shoot_timeout"]

@@ -79,12 +79,12 @@ func new_game():
 	drone_options.append({
 		'type': 'shooter',
 		'rent': 5,
-		'scene': 'res://droneRam.tscn'
+		'scene': 'res://droneShooter.tscn'
 	})
 	drone_options.append({
 		'type': 'taunt',
 		'rent': 10,
-		'scene': 'res://droneRam.tscn'
+		'scene': 'res://droneTaunt.tscn'
 	})
 	
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
@@ -145,7 +145,7 @@ func _on_hud_scale_up(drone_option):
 	add_child(drone)
 
 func _on_hud_scale_down(drone_option):
-	var drones = get_tree().get_nodes_in_group('drone')
+	var drones = get_tree().get_nodes_in_group(drone_option['type'])
 	if len(drones) > 0:
 		drones[0].on_destroy()
 
