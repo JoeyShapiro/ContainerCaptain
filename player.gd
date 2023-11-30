@@ -8,6 +8,8 @@ signal destroy
 @export var max_gold = 100 # energy
 @export var resources = 0 # TODO should i swap these or something
 @export var bullet_scene : PackedScene
+# TODO i guess it can go here
+@export var damnum_scene : PackedScene
 
 var hull
 var gold
@@ -61,6 +63,10 @@ func on_hit(damage):
 	hit.emit()
 	hull -= damage
 	stat_change.emit()
+	
+	var damnum = damnum_scene.instantiate()
+	damnum.set_text(position, damage)
+	add_child(damnum)
 	
 	if hull <= 0:
 		destroy.emit()
@@ -117,5 +123,10 @@ func _on_timer_rent_timeout():
 	for drone in drones:
 		if gold - drone.cost > 0:
 			gold -= drone.cost
+			stat_change.emit()
+			
+			var damnum = damnum_scene.instantiate()
+			damnum.set_text(drone.position, -drone.cost)
+			add_child(damnum)
 		else:
 			drone.on_destroy()

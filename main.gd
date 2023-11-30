@@ -2,7 +2,6 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var droneRam_scene : PackedScene
-@export var damnum_scene : PackedScene
 @export var drone_options : Array[Dictionary]
 
 @export var sfx_collect_gold : AudioStream
@@ -30,6 +29,7 @@ var difficulty_counter
   - stop moving or soemthing
 - damage numbers -
   - numbers of rent
+  - numbers between player and enemy (rotation)
 """
 
 # Called when the node enters the scene tree for the first time.
@@ -129,9 +129,6 @@ func _on_difficulty_timeout():
 
 func _on_player_hit():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
-	var damnum = damnum_scene.instantiate()
-	damnum.set_text($Player.position, 1)
-	add_child(damnum)
 
 func _on_player_stat_change():
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)

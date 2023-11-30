@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://daojnt5ue41f"]
+[gd_scene load_steps=10 format=3 uid="uid://daojnt5ue41f"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_45dk6"]
 [ext_resource type="PackedScene" uid="uid://c1dggx807wm0g" path="res://player.tscn" id="1_ijd0x"]
 [ext_resource type="PackedScene" uid="uid://bwnudvv2w1r8r" path="res://pirateRam.tscn" id="2_iel74"]
 [ext_resource type="PackedScene" uid="uid://6mt6cmpr15eb" path="res://droneRam.tscn" id="3_8t2rh"]
 [ext_resource type="PackedScene" uid="uid://rw5ec1cqiwvk" path="res://hud.tscn" id="4_8pyms"]
-[ext_resource type="PackedScene" uid="uid://e0yn3fuglkq7" path="res://damage_number.tscn" id="4_oooah"]
 [ext_resource type="Shader" path="res://water.gdshader" id="5_7aeye"]
 [ext_resource type="PackedScene" uid="uid://cn86sp774x3y4" path="res://menu.tscn" id="7_vxl73"]
 
@@ -23,7 +22,6 @@ shader_parameter/scale = Vector2(10, 10)
 script = ExtResource("1_45dk6")
 mob_scene = ExtResource("2_iel74")
 droneRam_scene = ExtResource("3_8t2rh")
-damnum_scene = ExtResource("4_oooah")
 
 [node name="Player" parent="." instance=ExtResource("1_ijd0x")]
 
