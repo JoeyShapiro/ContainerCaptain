@@ -15,19 +15,10 @@ var difficulty_counter
 
 # TODO
 """
-- scale game window
 - leveling
 - progress bars
-- fix ui (look half decent)
-- clean functions
-- better art
-- more sounds
-  - sound when pay
-  - bool check if can pay
-  - stop moving or soemthing
 - damage numbers -
   - numbers between player and enemy (rotation)
-- max drones (capacity)
 """
 
 # Called when the node enters the scene tree for the first time.
