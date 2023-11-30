@@ -40,8 +40,6 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-	if Input.is_action_pressed("shoot"):
-		shoot()
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -130,3 +128,4 @@ func _on_timer_rent_timeout():
 			add_child(damnum)
 		else:
 			drone.on_destroy()
+	# TODO should emit with cost

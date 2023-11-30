@@ -21,7 +21,6 @@ var difficulty_counter
 - progress bars
 - fix ui (look half decent)
 - clean functions
-- validate input and stuff (scaling ui)
 - better art
 - more sounds
   - sound when pay
@@ -29,6 +28,7 @@ var difficulty_counter
   - stop moving or soemthing
 - damage numbers -
   - numbers between player and enemy (rotation)
+- max drones (capacity)
 """
 
 # Called when the node enters the scene tree for the first time.
@@ -146,7 +146,8 @@ func _on_hud_scale_up(drone_option):
 
 func _on_hud_scale_down(drone_option):
 	var drones = get_tree().get_nodes_in_group('drone')
-	drones[0].on_destroy()
+	if len(drones) > 0:
+		drones[0].on_destroy()
 
 func _on_menu_new_game():
 	new_game()

@@ -56,6 +56,7 @@ func _process(delta):
 		$HudAudio.play()
 	if Input.is_action_just_pressed("menu_scale_up"):
 		$Units.get_child(selected_option)._on_scale_up_pressed()
+		# TODO return bool then play proper sound
 		$HudAudio.stream = sound_scale_up
 		$HudAudio.play()
 
