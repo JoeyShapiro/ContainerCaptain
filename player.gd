@@ -107,11 +107,17 @@ func on_pickup(item):
 	# ... make always give gold, but not other stuff
 	# ... gold has vacuum
 	print('collected ', item)
+	var amount = 1
 	if item == 'resource':
-		resources += 1
+		resources += amount
 	elif item == 'gold' and gold < max_gold:
-		gold += 1 # TODO this has hidden functionality
+		amount = randi_range(1, 10)
+		gold += amount # TODO this has hidden functionality
 	stat_change.emit()
+	
+	var damnum = damnum_scene.instantiate()
+	damnum.set_text(position, amount)
+	add_child(damnum)
 
 # do it this way is cheaper (one timer) and makes sense (pay all at once)
 # maybe be in them, so each goes down correctly
