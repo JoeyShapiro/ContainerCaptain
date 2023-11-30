@@ -16,9 +16,6 @@ var difficulty_counter
 # TODO
 """
 - leveling
-- progress bars
-- damage numbers -
-  - numbers between player and enemy (rotation)
 """
 
 # Called when the node enters the scene tree for the first time.
@@ -53,6 +50,7 @@ func game_over():
 func new_game():
 	$Player.show()
 	$Menu.hide()
+	$Hud.show()
 	timer = 0
 	difficulty_counter = 0
 	difficulty_scale = 0
