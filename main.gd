@@ -28,7 +28,6 @@ var difficulty_counter
   - bool check if can pay
   - stop moving or soemthing
 - damage numbers -
-  - numbers of rent
   - numbers between player and enemy (rotation)
 """
 
@@ -53,6 +52,8 @@ func game_over():
 	$Difficulty.stop()
 	$TimerMob.stop()
 	
+	$Player.hide()
+	$Hud.hide()
 	$Menu.show()
 
 func new_game():
