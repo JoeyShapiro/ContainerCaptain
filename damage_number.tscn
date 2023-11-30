@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://e0yn3fuglkq7"]
+
+[ext_resource type="Script" path="res://DamageNumber.gd" id="1_aaa46"]
+
+[node name="DamageNumber" type="CanvasLayer"]
+script = ExtResource("1_aaa46")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+
+[node name="TimerToLive" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="TimerToLive" to="." method="_on_timer_to_live_timeout"]
