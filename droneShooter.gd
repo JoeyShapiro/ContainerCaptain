@@ -7,7 +7,7 @@ var player
 @export var speed = 1
 @export var max_hull = 10
 @export var damage = 5
-@export var cost = 10
+@export var cost = 5
 var hull
 
 # Called when the node enters the scene tree for the first time.
