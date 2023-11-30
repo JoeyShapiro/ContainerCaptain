@@ -15,7 +15,6 @@ var difficulty_counter
 
 # TODO
 """
-- different drones -
 - scale game window
 - leveling
 - progress bars
@@ -49,6 +48,10 @@ func game_over():
 	for enemy in enemies:
 		enemy.queue_free()
 	
+	var drones = get_tree().get_nodes_in_group('drone')
+	for drone in drones:
+		drone.queue_free()
+	
 	$Difficulty.stop()
 	$TimerMob.stop()
 	
@@ -72,19 +75,14 @@ func new_game():
 		'scene': 'res://droneRam.tscn'
 	})
 	drone_options.append({
-		'type': 'gaurd',
-		'rent': 3,
-		'scene': 'res://droneRam.tscn'
-	})
-	drone_options.append({
 		'type': 'shooter',
 		'rent': 5,
 		'scene': 'res://droneShooter.tscn'
 	})
 	drone_options.append({
-		'type': 'taunt',
+		'type': 'gaurd',
 		'rent': 10,
-		'scene': 'res://droneTaunt.tscn'
+		'scene': 'res://droneTaunt.tscn' # TODO more of a taunt
 	})
 	
 	$Hud.display_stats($Player.hull, $Player.gold, $Player.resources)
