@@ -4,10 +4,6 @@ extends Node
 @export var droneRam_scene : PackedScene
 @export var drone_options : Array[Dictionary]
 
-@export var sfx_collect_gold : AudioStream
-@export var sfx_collect_res : AudioStream
-@export var sfx_pay_rent : AudioStream
-
 var timer
 var difficulty_scale
 # could reverse it, but just make new value

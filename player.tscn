@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1dggx807wm0g"]
+[gd_scene load_steps=9 format=3 uid="uid://c1dggx807wm0g"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_uaiom"]
 [ext_resource type="Texture2D" uid="uid://dpbvgo00e1uty" path="res://freighter.png" id="2_o0l43"]
 [ext_resource type="PackedScene" uid="uid://cibem5vqpeyps" path="res://bullet.tscn" id="2_rmgub"]
 [ext_resource type="PackedScene" uid="uid://e0yn3fuglkq7" path="res://damage_number.tscn" id="3_qliqx"]
+[ext_resource type="AudioStream" uid="uid://cicgnh3pmeuh2" path="res://Sounds/item00.wav" id="4_uxo1o"]
+[ext_resource type="AudioStream" uid="uid://cxmx7gw7cm8en" path="res://Sounds/select00.wav" id="5_sethm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uaig3"]
 animations = [{
@@ -31,6 +33,8 @@ collision_mask = 11
 script = ExtResource("1_uaiom")
 bullet_scene = ExtResource("2_rmgub")
 damnum_scene = ExtResource("3_qliqx")
+sfx_collect_gold = ExtResource("4_uxo1o")
+sfx_collect_res = ExtResource("5_sethm")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -45,6 +49,8 @@ shape = SubResource("CapsuleShape2D_p445x")
 wait_time = 2.0
 
 [node name="TimerRent" type="Timer" parent="."]
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="TimerShoot" to="." method="_on_timer_shoot_timeout"]
 [connection signal="timeout" from="TimerRent" to="." method="_on_timer_rent_timeout"]

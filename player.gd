@@ -11,6 +11,10 @@ signal destroy
 # TODO i guess it can go here
 @export var damnum_scene : PackedScene
 
+@export var sfx_collect_gold : AudioStream
+@export var sfx_collect_res : AudioStream
+@export var sfx_pay_rent : AudioStream
+
 var hull
 var gold
 var damage
@@ -71,6 +75,9 @@ func on_hit(damage):
 
 func start(pos):
 	position = pos
+	hull = max_hull
+	resources = 0
+	gold = max_gold
 	show()
 	$CollisionShape2D.disabled = false
 
@@ -110,9 +117,13 @@ func on_pickup(item):
 	var amount = 1
 	if item == 'resource':
 		resources += amount
-	elif item == 'gold' and gold < max_gold:
+		$AudioPlayer.stream = sfx_collect_res
+		$AudioPlayer.play()
+	elif item == 'gold' and gold: # TODO  < max_gold:
 		amount = randi_range(1, 10)
-		gold += amount # TODO this has hidden functionality
+		gold += amount
+		$AudioPlayer.stream = sfx_collect_gold
+		$AudioPlayer.play()
 	stat_change.emit()
 	
 	var damnum = damnum_scene.instantiate()
