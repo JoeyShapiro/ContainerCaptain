@@ -45,7 +45,6 @@ func _on_timer_shoot_timeout():
 	# better than len(enemies)
 	if nearest_enemy:
 		var r = get_angle_to(enemies[0].position)
-		rotation = r
 		
 		var bullet = bullet_scene.instantiate()
 		bullet.position = position
