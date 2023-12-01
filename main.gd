@@ -13,11 +13,6 @@ var difficulty_scale
 # could reverse it, but just make new value
 var difficulty_counter
 
-# TODO
-"""
-- leveling
-"""
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Menu.show()
