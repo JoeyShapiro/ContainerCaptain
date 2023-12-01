@@ -6,7 +6,7 @@ var player
 
 @export var speed = 1
 @export var max_hull = 10
-@export var damage = 5
+@export var damage = 3
 @export var cost = 5
 var hull
 
